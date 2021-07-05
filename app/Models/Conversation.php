@@ -31,7 +31,7 @@ class Conversation extends Model
     }
 
     public function others(){
-        $this->users()->where('user_id', '!=', auth()->id());
+        return $this->users()->where('user_id', '!=', auth()->id());
     }
 
     /**
