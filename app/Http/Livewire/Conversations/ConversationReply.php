@@ -13,7 +13,7 @@ class ConversationReply extends Component
     public $body = '';
     public $attachment = '';
     public $attachment_name = '';
-    public $conversation = '';
+    public $conversation;
 
     public function mount(Conversation $conversation){
         $this->conversation = $conversation;
@@ -21,5 +21,9 @@ class ConversationReply extends Component
     public function render()
     {
         return view('livewire.conversations.conversation-reply');
+    }
+
+    public function reply(){
+
     }
 }
