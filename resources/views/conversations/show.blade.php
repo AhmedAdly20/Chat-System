@@ -23,7 +23,7 @@
                     <livewire:conversations.conversation-messages :conversation="$conversation" :messages="$conversation->messages" />
                 </div>
                 <!-- Typing area -->
-                <livewire:conversations.conversation-reply />
+                <livewire:conversations.conversation-reply :conversation="$conversation"/>
             </div>
         </div>
     </div>
