@@ -30,6 +30,10 @@ class Conversation extends Model
                     ->oldest();
     }
 
+    public function others(){
+        $this->users()->where('user_id', '!=', auth()->id());
+    }
+
     /**
      * Get all of the messages for the Conversation
      *
