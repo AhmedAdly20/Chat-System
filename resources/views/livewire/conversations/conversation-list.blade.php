@@ -9,10 +9,9 @@
                         <h6 class="mb-0">
                             {{ $conversation->name != '' ? $conversation->name : $conversation->users->pluck('name')->join(', ') }}
                         </h6>
-                        <small class="small font-weight-bold">25 Dec</small>
+                        <small class="small font-weight-bold">{{ \Carbon\Carbon::parse($conversation->last_message_at)->format('d M g:i A') }}</small>
                     </div>
-                    <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    <p class="font-italic mb-0 text-small">{{ $conversation->messages->last()->body }}</p>
                 </div>
             </div>
         </a>
