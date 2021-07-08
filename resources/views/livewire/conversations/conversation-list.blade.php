@@ -1,6 +1,8 @@
 <div>
     @forelse ($conversations as $conversation)
-        <a href="{{ route('conversations.show',$conversation) }}" class="list-group-item list-group-item-action active text-white rounded-0">
+        <a href="{{ route('conversations.show',$conversation) }}"
+        class="list-group-item list-group-item-action rounded-0 {{ \Str::contains(request()->path(), $conversation->uuid) ? 'active text-white' : 'list-group-item-light' }}"
+        >
             <div class="media"><img
                     src="https://img.icons8.com/ios-glyphs/60/000000/user-male-circle.png"
                     alt="{{ $conversation->name != '' ? $conversation->name : $conversation->users->pluck('name')->join(', ') }}" width="50" class="rounded-circle">
@@ -11,7 +13,17 @@
                         </h6>
                         <small class="small font-weight-bold">{{ \Carbon\Carbon::parse($conversation->last_message_at)->format('d M g:i A') }}</small>
                     </div>
-                    <p class="font-italic mb-0 text-small">{{ $conversation->messages->last()->body }}</p>
+                    <p class="font-italic mb-0 text-small">
+                        @if (!auth()->user()->hasRead($conversation))
+                            <span
+                                class="bg-danger mr-2 rounded-circle"
+                                style="display: inline-table; width: 10px; height: 10px;"
+                            >
+
+                            </span>
+                        @endif
+                        {{ $conversation->messages->first()->body }}
+                    </p>
                 </div>
             </div>
         </a>
